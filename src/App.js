@@ -1,24 +1,20 @@
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import classes from './app.module.css';
+import ReduxExample from './pages/ReduxExample';
+import ContextExample from './pages/ContextExample';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <div className={classes.app}>
+        <nav className={classes.nav}>
+          <p><Link to="/redux">Redux Sample</Link></p>
+          <p><Link to="/context">Context Sample</Link></p>
+        </nav>
+        <Route exact path='/redux' component={ReduxExample}/>
+        <Route exact path='/context' component={ContextExample}/>
+      </div>
+    </Router>
   );
 }
 
