@@ -1,64 +1,48 @@
-import { Provider, useSelector } from 'react-redux';
-import { createStore, combineReducers } from 'redux';
-
-const initialUserState = {
-  id: 1,
-  name: 'test name',
-};
-
-const initialPostsState = [
-  { id: 1, title: 'test post' },
-]
-
-const userReducer = (state = initialUserState, action) => {
-  switch (action.type) {
-    case 'UPDATE_NAME':
-      return {
-        ...state,
-        name: action.payload
-      }
-    default:
-      return state;
-  }
-}
-
-const postsReducer = (state = initialPostsState, action) => {
-  switch (action.type) {
-    case 'ADD_POST':
-      return [...state, action.payload]
-    default:
-      return state;
-  }
-}
-
-const reducers = combineReducers({
-  user: userReducer,
-  posts: postsReducer,
-});
-
-const store = createStore(reducers);
+import { Provider, useSelector, useDispatch } from 'react-redux';
+import { store } from '../reduxStore';
+import classes from './page.module.css';
 
 function UserInfo () {
   console.log('UserInfo is updated!');
   const user = useSelector(state => state.user);
+  const dispatch = useDispatch();
 
   return (
-    <>
+    <div className={classes.userContainer}>
       <p>{user.name}</p>
-    </>
+      <button
+        onClick={() => {
+          dispatch({ type: 'UPDATE_NAME', payload: 'updated name' });
+        }}
+      >
+        update user
+      </button>
+    </div>
   )
 }
 
 function PostList () {
   console.log('PostList is updated!');
   const posts = useSelector(state => state.posts);
+  const dispatch = useDispatch();
 
   return (
-    <ul>
-      {
-        posts.map(post => <li key={post.id}>{post.title}</li>)
-      }
-    </ul>
+    <div className={classes.postsContainer}>
+      <ul>
+        {
+          posts.map(post => <li key={post.id}>{post.title}</li>)
+        }
+      </ul>
+      <button
+        onClick={() =>  {
+          dispatch(
+            { type: 'ADD_POST', payload: { id: posts.length + 1, title: 'added post' }}
+          )
+        }}
+      >
+        add post
+      </button>
+    </div>
   )
 }
 
