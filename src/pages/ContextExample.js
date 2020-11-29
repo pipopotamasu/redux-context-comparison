@@ -1,6 +1,6 @@
 import { useContext, useReducer } from 'react';
 import { initialState, reducer, Context } from '../context';
-import classes from './page.module.css';
+import classes from '../styles/page.module.css';
 
 function UserInfo () {
   console.log('UserInfo is updated!');
