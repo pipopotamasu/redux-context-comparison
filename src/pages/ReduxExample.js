@@ -1,6 +1,6 @@
 import { Provider, useSelector, useDispatch } from 'react-redux';
 import { store } from '../reduxStore';
-import classes from './page.module.css';
+import classes from '../styles/page.module.css';
 
 function UserInfo () {
   console.log('UserInfo is updated!');

@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
-import classes from './app.module.css';
+import classes from './styles/app.module.css';
 import ReduxExample from './pages/ReduxExample';
 import ContextExample from './pages/ContextExample';
 
